@@ -1,6 +1,6 @@
 # YourControls_FlySimware_LEAR-35A
 YourControls_FlySimware_LEAR-35A
-
+## COMING SOON - IN BETA TESTING NOW
 # Known Issues:
    OCT 25, 2024 
    - HYDRAULIC PUMP SWITCH, HORN SILENCE SWITCH, SPOILER ON SWITCH will not sync
