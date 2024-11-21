@@ -1,0 +1,1046 @@
+# Version 00.1
+
+# Known Issues:
+  # OCT 25, 2024 
+  # - HYDRAULIC PUMP SWITCH, HORN SILENCE SWITCH, SPOILER ON SWITCH will not synch
+  # - GPS/NAV SWITCH for selecting GPS track or VLOC doesn't synch, but will follow the person in commands config
+  # - ALTERNATE Altimeter 3 located middle front panel toward the top will not synch, but other primary Alt indicators work fine. 
+  # - For some reason all GPS indicator lights (GREEN) on Glareshield for AP ROLL, AFCS and PITCH do not show on Second plane when selected on PIC plane. You should manually synch these for who ever is not in command by selecting them to ensure config matches prior to swapping to the second pilot. 
+  
+# FIXED:
+  # OCT 25, 2024 - ALL SWITCHES, KNOBS, LEVERS are working besides the listed itesm above
+
+# Added:
+  # OCT 25, 2024 - BETA TEST Release 
+
+include:
+#  - definitions/modules/Instruments/AS_GNS430.yaml
+  - definitions/modules/Instruments/WT_GNS430.yaml
+#  - definitions/modules/Instruments/AS_GNS530.yaml
+  - definitions/modules/Instruments/WT_GNS530.yaml
+  - definitions/modules/Instruments/AS_GTX330.yaml
+  - definitions/modules/Instruments/AS_GNS650.yaml  
+  - definitions/modules/Instruments/AS_KR87.yaml 
+  - definitions/modules/Instruments/AS_KAP140.yaml
+  - definitions/modules/Instruments/PMS50_GNS.yaml
+  - definitions/modules/Instruments/PMS50_GTN.yaml
+  - definitions/modules/Instruments/TDS_GTNXi.yaml
+  - definitions/modules/autopilot.yaml
+  - definitions/modules/commonlvars.yaml
+  - definitions/modules/controls.yaml
+  - definitions/modules/deice.yaml
+  - definitions/modules/controls.yaml  
+  - definitions/modules/electrical.yaml
+  - definitions/modules/engines.yaml
+  - definitions/modules/fuel.yaml
+  - definitions/modules/general.yaml
+  - definitions/modules/handling.yaml
+  - definitions/modules/lights.yaml
+  - definitions/modules/navigation.yaml
+  - definitions/modules/pressurization.yaml
+  - definitions/modules/radios.yaml
+  - definitions/modules/safety.yaml
+  - definitions/modules/transponder.yaml
+  - definitions/modules/trim.yaml
+  
+  
+shared:
+  - # TEST
+   type: NumSet
+   var_name: A:LIGHT LANDING:2
+   var_units: Bool
+   var_type: f64
+   event_name: LANDING_LIGHTS_SET
+   event_param: 2
+
+#  - # LVAR's
+#  - #############  CoPILOT PANELS - Right Arm #############
+#  - ## Master warning ##
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_MASTER_RESET2_1
+
+#  - #############  CoPILOT PANELS - Front Upper #############
+#  - ## DME CONFIG - CoPilot ##
+  - #
+    type: var
+    var_name: L:GENERIC_DME_TEST1_1
+  - #
+    type: var
+    var_name: L:XMLVAR_DME_MODE1A_Position
+  - #
+    type: var
+    var_name: L:DME_MODE1A
+  - #
+    type: var
+    var_name: L:XMLVAR_DME_MODE2A_Position
+  - #
+    type: var
+    var_name: L:DME_MODE2A
+  - # Airspeed Bug - CoPilot
+    type: var
+    var_name: L:GENERIC_LEAR_AIRSPEED_KNOB_R
+#  - ## RMI - CoPilot ##
+  - #
+    type: var
+    var_name: L:GENERIC_RMI_BUTTON3_1
+  - #
+    type: var
+    var_name: L:GENERIC_RMI_BUTTON4_1
+#  - ## Landing Gear Panel ##
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_GEAR_TEST
+  - #
+    type: var
+    var_name: L:XMLVAR_GEAR_BRT_KNOB
+  - #
+    type: var
+    var_name: L:LANDING_GEAR_Gear
+#  - # Landing Gear Handle
+#    type: var
+#    var_name: L:
+#
+#  - ## HSI - CoPilot ##
+  - # Course Knob
+    type: var
+    var_name: L:INSTRUMENT_Course_2
+#  - ## Altitude Indicator - CoPilot ##
+  - #
+    type: var
+    var_name: L:ALERTER_DIAL_DIGITAL_CUSTOM_R_sec
+  - #
+    type: var
+    var_name: L:INSTRUMENT_Altimeter_2
+#  - ## RADAR ALTITUDE - CoPilot ##
+  - #
+    type: var
+    var_name: L:GENERIC_RADAR_TEST_SW_1
+  - #
+    type: var
+    var_name: L:XMLVAR_KNOB_DECISION_HEIGHT_Position
+  - # ELT ARM/ON SW
+    type: var
+    var_name: L:GENERIC_ELT_TRANSMITTER
+#  - ## Light Dimmers - CoPilot ##
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_LTS_PEDESTAL_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_LTS_EL_R_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_LTS_PNL_R_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_LTS_MAP_R_Position
+
+#  - ## MAP LIGHT MOVEMENT - CoPilot ##
+  - #
+    type: var
+    var_name: L:Map_Light_Drag_Nozzle_CoPilot1_Horizontal
+  - #
+    type: var
+    var_name: L:Map_Light_Drag_Nozzle_CoPilot1_Vertical
+  - # Wing Inspection Light
+    type: var
+    var_name: L:GENERIC_WING_INSPECTION_SWITCH
+
+#  - #############  CoPILOT PANELS - Front Lower #############
+#  - ## Presurization Panel ##
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_CABIN_PRESSURE_KNOB_Position
+  - #
+    type: var
+    var_name: L:GENERIC_CABIN_AIR_MODE
+#  - ## Climate Control Panel ##
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_TEMP_AUTO_1
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_TEMP_CONTROL_Position
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_TEMP_FAN
+#  - ## LIGHTING PANEL - CoPilot ##
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_BLEED_L
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_BLEED_R
+  - #
+    type: var
+    var_name: L:LIGHTING_RECOGNITION_1
+  - #
+    type: var
+    var_name: L:LIGHTING_STROBE_1
+  - #
+    type: var
+    var_name: L:LIGHTING_NAV_1
+  - #
+    type: var
+    var_name: L:LIGHTING_BEACON_1
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_SLAVE_LR2
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_SLAVE_FREE2
+
+#  - #############  GLARESHIELD PANELS #############
+#  - ## Fire System Functions ##
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_BOTTLE1_ENG1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_BOTTLE2_ENG1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_FIRE_HANDLE1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_BOTTLE1_ENG2
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_BOTTLE2_ENG2
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_FIRE_HANDLE2
+#  - ## THrust Reverser Functions ##
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_REV_L
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_REV_R
+#  - ## AutoPilot Roll MODES Functions ##
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AP_HDG_1
+    cancel hEvnet
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AP_BNC_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AP_NAV_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AP_BC_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AP_LVL_1
+ #  - ## AutoPilot AFCSS Functions ##   
+  - #
+    type: var
+    var_name: L:AUTOPILOT_LIGHT_TEST
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AP_ENG_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AP_SFT_1
+#  - ## AutoPilot PITCH MODES Functions ##
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AP_VS_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AP_GS_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AP_ALTSELS_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AP_ALTHLD_1
+
+#  - #############  MISCELLENEOUS ITEMS #############
+#  - ## YOKES VISIBILITY ##
+  - #
+    type: var
+    var_name: L:XMLVAR_YokeHidden1
+  - #
+    type: var
+    var_name: L:XMLVAR_YokeHidden2
+#  - ## YOKES BUTTONS ##
+  - # PILOT
+    type: var
+    var_name: L:GENERIC_LEAR_STEER_ON_PILOT_1
+  - #
+    type: var
+    var_name: L:AP_PITCH_REF
+  - #
+    type: var
+    var_name: L:GENERIC_Manuv_RP_Switch_Pilot_1
+  - #
+    type: var
+    var_name: L:GENERIC_Pitch_Sync_Switch_Pilot_1
+  - # CoPILOT
+    type: var
+    var_name: L:GENERIC_LEAR_STEER_ON_COPILOT_1
+  - #
+    type: var
+    var_name: L:GENERIC_Manuv_RP_Switch_CoPilot_1
+  - #
+    type: var
+    var_name: L:GENERIC_Pitch_Sync_Switch_CoPilot_1
+#  - ## TABLET VISIBILITY & POWER ##
+  - #
+    type: var
+    var_name: L:SHOW_HIDE_EFB
+  - #
+    type: var
+    var_name: L:EFB_PUSH_POWER
+  - #
+    type: var
+    var_name: L:EFB_BRIGHTNESS
+
+#  - ## TABLET CONFIGUTATION SCREEN ##
+  - # EQUIPMENT
+    type: var
+    var_name: L:EFB_PUSH_CHOCKS
+  - #
+    type: var
+    var_name: L:EFB_PUSH_ECOVER
+  - #
+    type: var
+    var_name: L:EFB_PUSH_PCOVER
+  - #
+    type: var
+    var_name: L:EFB_PUSH_FCOVER
+  - #
+    type: var
+    var_name: L:EFB_PUSH_GPU
+  - #
+    type: var
+    var_name: L:EFB_PUSH_DIGITAL_SOUND
+  - # LIGHTS
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_STEP
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_CABIN
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_DIM
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_BAGGAGE
+  - # CABIN DOORS
+    type: var
+    var_name: L:LEAR_DOORHANDLE_TOP
+  - #
+    type: var
+    var_name: L:LEAR_DOORHANDLE_BOTTOM
+  - #
+    type: var
+    var_name: L:LEAR_DOOR_TOP_OPEN_CLOSE
+  - #
+    type: var
+    var_name: L:LEAR_DOOR_BOTTOM_OPEN_CLOSE
+  - # COCKPIT DOOR
+    type: var
+    var_name: L:COCKPIT_DOOR_DIVIDER
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_DOOR_DIVIDER_HANDLE
+  - # CABIN TABLES
+    type: var
+    var_name: L:GENERIC_LEAR_TABLE_FOLD_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_TABLE_FOLD_2
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_TABLE_FOLD_3
+  - # CABIN SHADES
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN2
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN3
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN4
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN5
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN6
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN7
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN8
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN9
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN10
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_CURTAIN11
+
+#  - ## TABLET PAYLOAD SCREEN ##
+  - # SEATS - Characters
+    type: var
+    var_name: L:PLOT
+  - #
+    type: var
+    var_name: L:COPLOT
+  - #
+    type: var
+    var_name: L:JOHN
+  - #
+    type: var
+    var_name: L:MARY
+  - #
+    type: var
+    var_name: L:JULIE
+  - #
+    type: var
+    var_name: L:RICKB
+  - #
+    type: var
+    var_name: L:RICKN
+  - #
+    type: var
+    var_name: L:MARY
+  - #
+    type: var
+    var_name: L:DORITHY
+  - #
+    type: var
+    var_name: L:ALICIA
+  - #
+    type: var
+    var_name: L:JAKE
+  - #
+    type: var
+    var_name: L:WILL
+  - #
+    type: var
+    var_name: L:CINDYB
+  - #
+    type: var
+    var_name: L:CINDYT
+  - #
+    type: var
+    var_name: L:BOBBY
+  - # BAGGAGE
+    type: var
+    var_name: L:LUGGAGE_1
+  - #
+    type: var
+    var_name: L:LUGGAGE_2
+  - #
+    type: var
+    var_name: L:LUGGAGE_3
+  - #
+    type: var
+    var_name: L:LUGGAGE_4
+  - #
+    type: var
+    var_name: L:LUGGAGE_5
+
+#  - ## TABLET WEIGHT & BALANCE SCREEN ##
+  - # FUEL
+    type: var
+    var_name: L:STORED_LEFT_TIP_FUEL   
+    unreliable: true
+  - #
+    type: var
+    var_name: L:STORED_RIGHT_TIP_FUEL
+    unreliable: true
+  - #
+    type: var
+    var_name: L:STORED_FUSELAGE_FUEL
+    unreliable: true
+  - #
+    type: var
+    var_name: L:STORED_LEFT_WING_FUEL
+    unreliable: true
+  - #
+    type: var
+    var_name: L:STORED_RIGHT_WING_FUEL
+    unreliable: true
+
+#  - ## TABLET CHECKLIST SCREEN ##
+  - #
+    type: var
+    var_name: L:CHECKLIST_COUNT
+  - #
+    type: var
+    var_name: L:CHECKLIST_ACTIVE
+
+#  - ## TABLET SETTINGS SCREEN ##
+  - # SOUNDS
+    type: var
+    var_name: L:TRIM_CLACKER_DISABLED
+  - #
+    type: var
+    var_name: L:N2_CLACKER_DISABLED
+  - #
+    type: var
+    var_name: L:EFB_INVERTER_DISABLED
+  - #
+    type: var
+    var_name: L:EFB_AVIONICS_DISABLE
+  - #
+    type: var
+    var_name: L:EFB_DISABLE_SOUND
+  - # OPTIONS
+    type: var
+    var_name: L:PAYLOAD_SYNC
+  - #
+    type: var
+    var_name: L:SAVE_FUEL_STATE
+  - #
+    type: var
+    var_name: L:SHOW_PASSENGERS
+  - # UNITS
+    type: var
+    var_name: L:METRIC_TRUE
+  - #
+    type: var
+    var_name: L:DAVTRON_TWENTYFOUR_TWELVE
+  - # FUEL Quantity/Weight
+    type: var
+    var_name: L:FUEL_WEIGHT_TRUE
+#  - ############# PASSENGER CABIN LIGHTS #############
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_PASS1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_PASS2
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_PASS3
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_PASS4
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_PASS5
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_PASS6
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_PASS7
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_PASS8
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_PASS9
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_LTS_PASS10
+
+#  - #############  PEDISTAL - Quadrant Area #############
+  - #
+    type: var
+    var_name: L:GA_MOMENTARY_BUTTON
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_EMER_BRAKE
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_TURB_1
+
+#  - #############  PEDISTAL - MIDDLE #############
+#  - ## FUEL TANK PANEL ##
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_FUEL_SEL_Position
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_FUEL_RESET
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_FUEL_MAINPUMP1_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_FUEL_MAINPUMP2_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_FUEL_SECPUMP1_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_FUEL_SECPUMP2_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_FUEL_JTSN_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_FUEL_XFEED_1
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_FUEL_XFER
+
+#  - #############  PEDISTAL - Lower Left ROW #############
+#  - ## FUEL TANK PANEL ##
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_STEER_LOCK_1
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_TRIM_PRI_SEC
+  - #
+    type: var
+    var_name: L:HANDLING_RudderTrim
+
+#  - #############  PEDISTAL - Lower MIDDLE ROWs #############
+#  - ## YAW DAMPER CONFIG PANEL ##
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_YAW_PRI_PWR
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_YAW_PRI_ENG
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_YAW_TEST
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_YAW_SEC_PWR
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_YAW_SEC_ENG
+
+#  - ## COM 1 Radio PANEL ##
+  - #
+    type: var
+    var_name: L:COM_ON2
+  - #
+    type: var
+    var_name: L:XMLVAR_COLLINS_COM_POWER2_Position
+  - #
+    type: var
+    var_name: L:GENERIC_COM2_TEST_1
+  - #
+    type: var
+    var_name: L:XMLVAR_COM2_WHOLE_TUNER_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_COM2_FRACT_TUNER_Position
+
+#  - ## NAV 2 Radio PANEL ##
+  - #
+    type: var
+    var_name: L:NAV_ON2
+  - #
+    type: var
+    var_name: L:XMLVAR_COLLINS_NAV_POWER2_POSITION
+  - #
+    type: var
+    var_name: L:GENERIC_NAV2_TEST_1
+  - #
+    type: var
+    var_name: L:XMLVAR_NAV2_WHOLE_TUNER_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_NAV2_FRACT_TUNER_Position
+
+#  - ## ADF 1 Radio PANEL ##
+  - #
+    type: var
+    var_name: L:ADF_ON1
+  - #
+    type: var
+    var_name: L:XMLVAR_COLLINS_ADF_POWER1_POSITION
+  - #
+    type: var
+    var_name: L:GENERIC_ADF1_TEST_1
+  - #
+    type: var
+    var_name: L:XMLVAR_ADF1_WHOLE_TUNER_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_ADF1_FRACT_TUNER_Position
+
+#  - ## ADF 2 Radio PANEL ##
+  - #
+    type: var
+    var_name: L:ADF_ON2
+  - #
+    type: var
+    var_name: L:XMLVAR_COLLINS_ADF2_POWER2_POSITION
+  - #
+    type: var
+    var_name: L:GENERIC_ADF2_TEST_1
+  - #
+    type: var
+    var_name: L:XMLVAR_ADF2_WHOLE_TUNER_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_ADF2_FRACT_TUNER_Position
+
+#  - #############  PILOT PANELS LEFT ARM #############
+#  - ## LIGHTING DIMMERS ##
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_LTS_PNL_L_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_LTS_EL_L_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_LTS_FLOOD_L_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_LTS_HSI_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_LTS_MAP_L_Position
+
+#  - ## MAP LIGHT MOVEMENT -PILOT ##
+  - #
+    type: var
+    var_name: L:Map_Light_Drag_Nozzle_Pilot1_Horizontal
+  - #
+    type: var
+    var_name: L:Map_Light_Drag_Nozzle_Pilot1_Vertical
+
+#  - ## MIC HEADPHONE ##
+  - #
+    type: var
+    var_name: L:HEADSET_FILTER
+  - #
+    type: var
+    var_name: L:GENERIC_HEADSET_FILTER
+
+#  - #############  PILOT PANELS - FRONT UPPER #############
+  - # MASTER WARNING
+    type: var
+    var_name: L:GENERIC_LEAR_SW_MASTER_RESET1
+
+#  - ## CHRONOMETER ##
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_DAVTRON_SWITCH_SET
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_DAVTRON_SWITCH_DIM
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_DAVTRON_SWITCH_FT
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_DAVTRON_SWITCH_STOP
+  - # AIRSPEED BUG - PILOT
+    type: var
+    var_name: L:GENERIC_LEAR_AIRSPEED_KNOB_L
+#  - ## RMI - PILOT ##
+  - #
+    type: var
+    var_name: L:GENERIC_RMI_BUTTON1_1
+  - #
+    type: var
+    var_name: L:GENERIC_RMI_BUTTON2_1
+  - #
+    type: var
+    var_name: L:AS530_CDI_Push
+  - # MARKER NAV TEST
+    type: var
+    var_name: L:GENERIC_LEAR_SW_MARKER_TEST_1
+
+#  - ## HSI- PILOT ##
+  - #
+    type: var
+    var_name: L:INSTRUMENT_Course_1
+  - # ANNUNCIATION TEST
+    type: var
+    var_name: L:GENERIC_L35A_SWITCH_ANNUNCIATOR_TEST_1
+  - # Altitude Bar
+    type: var
+    var_name: L:ALTITUDE_CAGE
+  - # Altitude Indicator - Pilot
+    type: var
+    var_name: L:ALERTER_DIGITAL
+  - #
+    type: var
+    var_name: L:ALERTER_DIAL_DIGITAL_CUSTOM_L_sec
+  - #
+    type: var
+    var_name: L:INSTRUMENT_Altimeter_1
+
+#  - ## DME CONFIG PANEL - PILOT ##
+  - #
+    type: var
+    var_name: L:GENERIC_DME_TEST_1
+  - #
+    type: var
+    var_name: L:XMLVAR_DME_MODE1_Position
+  - #
+    type: var
+    var_name: L:DME_MODE1
+  - #
+    type: var
+    var_name: L:XMLVAR_DME_MODE2_Position
+  - #
+    type: var
+    var_name: L:DME_MODE2
+
+#  - #############  PILOT PANELS - FRONT LOWER #############
+#  - # AUDIO PANEL ##
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_AUDIO_PASS_SPKR1
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_AUDIO_PHONE1
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_SW_AUDIO_SPKR_VOL1_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_SW_AUDIO_MSTR_VOL1_Position
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_SW_AUDIO_TRANS1_Position
+
+#  - # DE-ICE and MISC SWITCHES PANEL ##
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_WSHLD_HEAT
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_WSHLD_RADOME
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW__STATIC_SOURCE
+  - #
+    type: var
+    var_name: L:XMLVAR_DeiceAirFrame_Auto
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_RADIO_ALT_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_AUTOPILOT
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_SLAVE_FREE1
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_SLAVE_LR1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_AC_BUS
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_EMER_BATT
+
+#  - # FUEL CONTROL PANEL ##
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_COMPLEFT_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_SW_COMPRIGHT_1
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_SPR
+
+#  - # FUEL CONTROL PANEL ##
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AIRSTART_L_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_AIRSTART_R_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_INV_PRI_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_INV_SEC_1
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_STARTER_L
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_STARTER_R
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_BATT1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_BATT2
+
+#  - #############  PILOT PANELS - MIDDLE UPPER #############
+#  - # N1 Reminder Values ##
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_N1_REMINDER_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_N1_REMINDER_10
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_N1_REMINDER_100
+  - # ALTM ALERTER
+    type: var
+    var_name: L:GENERIC_LEAR_ALERTER_TEST
+  - # ALERTER DAY/NIGHT SWITCH
+    type: var
+    var_name: L:GENERIC_LEAR_ALERTER_DAY
+  - # AIR DATA BUTTON
+    type: var
+    var_name: L:GENERIC_LEAR_ADC1_ADC2
+  - # ALTIMETER KNOB
+    type: var
+    var_name: L:INSTRUMENT_Altimeter_3
+
+#  - # WEATHER RADAR ##
+  - #
+    type: var
+    var_name: L:XMLVAR_BENDIX_RADAR_RANGE_Position
+  - #
+    type: var
+    var_name: L:GENERIC_BENDIX_RADAR_MODE
+  - #
+    type: var
+    var_name: L:WxRadarRange
+
+
+#  - #############  PILOT PANELS - MIDDLE LOWER #############
+  - # ANTISKID
+    type: var
+    var_name: L:GENERIC_LEAR_SW_ANTISKID_1
+  - # Stall Warning
+    type: var
+    var_name: L:GENERIC_LEAR_STALL_L_1
+  - #
+    type: var
+    var_name: L:GENERIC_LEAR_STALL_R_1
+  - #  TAXI/LANDING LIGHTS
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_TAXI_LAND_L
+  - #
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_TAXI_LAND_R
+  - # SYSTEMS TEST KNOB?BTN
+    type: var
+    var_name: L:GENERIC_LEAR_TEST_BUTTON
+  - #
+    type: var
+    var_name: L:XMLVAR_LEAR_TEST_KNOB_Position
+  -
+    type: ToggleSwitch
+    var_name: A:HYDRAULIC SWITCH:3
+    var_units: Bool
+    var_type: bool
+    event_name: HYDRAULIC_SWITCH_TOGGLE
+    event_param: 3
+
+  - # SEAT BELT/NO SMOKING SW
+    type: var
+    var_name: L:GENERIC_Momentary_LEAR_SW_SMOKING
+  - # HORN SILENCE SW (SILENCE/OFF)
+    type: var
+    var_name: L:GENERIC_LEAR_SW_HORN_SILENCE_1
+  - #
+    type: var
+    var_name: L:HORN_SILENCE
+  - # SPOILERON (RESET/OFF)
+    type: var
+    var_name: L:GENERIC_LEAR_SPOILERON_RESET
+
+
+server:
+  -
+    type: var
+    var_name: A:FUEL TANK LEFT MAIN LEVEL
+    var_units: Percent
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:FUEL TANK RIGHT MAIN LEVEL
+    var_units: Percent
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:1
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:2
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:3
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:4
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:5
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:6
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:7
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:8
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:9
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:10
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:11
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
