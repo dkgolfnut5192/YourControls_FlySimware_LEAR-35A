@@ -1,5 +1,6 @@
 # YourControls_FlySimware_LEAR-35A
 YourControls_FlySimware_LEAR-35A
+# Made for MSFS2020 and not validated for 2024
 ## COMING SOON - IN BETA TESTING NOW
 # Known Issues:
    OCT 25, 2024 
